@@ -674,7 +674,7 @@ wait_for_health() {
         if ! systemctl is-active "$SERVICE_NAME" >/dev/null 2>&1; then
             return 1
         fi
-        if curl -fsS "http://127.0.0.1:${HEALTH_PORT}/healthz" >/dev/null 2>&1; then
+        if curl -fsS "http://localhost:${HEALTH_PORT}/healthz" >/dev/null 2>&1; then
             return 0
         fi
         sleep 1
@@ -721,7 +721,7 @@ perform_install() {
     log_info "Config: ${CONFIG_FILE}"
     log_info "Credentials: ${CREDENTIALS_FILE}"
     if [ "$HEALTH_ENABLED" -eq 1 ]; then
-        log_info "Health: http://127.0.0.1:${HEALTH_PORT}/healthz"
+        log_info "Health: http://localhost:${HEALTH_PORT}/healthz"
     fi
     log_info "CLI: ${CLI_PATH}  (run '${CLI_PATH} list' if xbctl is not in PATH)"
 }

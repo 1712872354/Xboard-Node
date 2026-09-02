@@ -62,7 +62,7 @@ func runWithReload(initialRoot *config.RootConfig, configPath string) {
 		if port <= 0 {
 			return
 		}
-		ln, err := net.Listen("tcp", fmt.Sprintf(":%d", port))
+		ln, err := net.Listen("tcp", fmt.Sprintf("[::]:%d", port))
 		if err != nil {
 			nlog.Core().Error("failed to start health check listener", "port", port, "error", err)
 			os.Exit(1)

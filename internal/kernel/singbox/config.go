@@ -186,6 +186,9 @@ func buildRoutes(panelRoutes []model.RouteRule, customRules []model.CustomRouteR
 				"fc00::/7",
 				"fe80::/10",
 				"::1/128",
+				"ff00::/8",
+				"100::/64",
+				"2001:db8::/32",
 			},
 		},
 	)
