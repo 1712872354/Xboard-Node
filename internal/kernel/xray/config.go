@@ -37,7 +37,13 @@ func buildConfig(kcfg config.KernelConfig, nc *model.NodeSpec, users []model.Use
 
 	// Add default outbounds only if not already defined (Issue #1: Panel priority)
 	if !tags["direct"] {
-		outbounds = append([]M{{"protocol": "freedom", "tag": "direct"}}, outbounds...)
+		outbounds = append([]M{{
+			"protocol": "freedom",
+			"tag":      "direct",
+			"settings": M{
+				"domainStrategy": "UseIPv6",
+			},
+		}}, outbounds...)
 	}
 	if !tags["block"] {
 		// block is often added after direct but before others for safety

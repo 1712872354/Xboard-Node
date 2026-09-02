@@ -39,7 +39,7 @@ func buildConfig(kcfg config.KernelConfig, nc *model.NodeSpec, users []model.Use
 
 	// Add default outbounds only if not already defined
 	if !tags["direct"] {
-		outbounds = append([]M{{"type": "direct", "tag": "direct"}}, outbounds...)
+		outbounds = append([]M{{"type": "direct", "tag": "direct", "domain_strategy": "prefer_ipv6"}}, outbounds...)
 	}
 	if !tags["block"] {
 		outbounds = append(outbounds, M{"type": "block", "tag": "block"})
@@ -51,6 +51,11 @@ func buildConfig(kcfg config.KernelConfig, nc *model.NodeSpec, users []model.Use
 			"timestamp": true,
 		},
 		"outbounds": outbounds,
+		// Default DNS strategy: prefer IPv6 for dual-stack environments.
+		// Can be overridden by kernel.custom_config dns section.
+		"dns": M{
+			"strategy": "prefer_ipv6",
+		},
 	}
 
 	inbound := buildInbound(nc, users, tc)
