@@ -1115,7 +1115,7 @@ func instanceAwareHealth() string {
 	if port == 0 {
 		return "disabled"
 	}
-	url := fmt.Sprintf("http://127.0.0.1:%d/healthz", port)
+	url := fmt.Sprintf("http://localhost:%d/healthz", port)
 	client := &http.Client{Timeout: 3 * time.Second}
 	resp, err := client.Get(url)
 	if err != nil {
